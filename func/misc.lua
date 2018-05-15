@@ -25,12 +25,11 @@ function misc.generateName(wordCount)
 	while line do
 		words[#words+1] = f:read("*line")
 	end
-	f:close()
 
-	local name = ""
-	for i = 1, wordCount do
-		name = name .. words[math.random(1, #words)]
-	end
+	local name = "bob"
+	--for i = 1, wordCount do
+	--	name = name .. words[math.random(1, #words)]
+	--end
 
 	return name
 end
