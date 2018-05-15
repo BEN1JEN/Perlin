@@ -5,25 +5,28 @@ local currentPlayer = ""
 function player.movePlayer(delta)
 
 	local sneek, run, jump, left, right = input.getPlayerInput()
-	local playerX, playerY, playerVX, playerVY = player.getPlayerPos(), player.getPlayerVelocity()
+	local playerX, playerY = player.getPlayerPos()
+	local playerVX, playerVY = player.getPlayerVelocity()
 
-	local speed = 60
-	local maxSpeed = 40
+	local speed = 100
+	local maxSpeed = 20
+	local deceliration = 1000
 
 	if sneek then
-		speed = 60
-		maxSpeed = 10
+		speed = 100
+		maxSpeed = 5
 	elseif run then
-		speed = 60
-		maxSpeed = 10
+		speed = 50
+		maxSpeed = 40
 	end
 
 	if left and not right then
-		playerVX = playerVY + speed * delta
+		playerVX = playerVY - speed * delta
 	elseif right and not left then
 		playerVX = playerVY + speed * delta
 	else
-		playerVX = playerVX * deceliration / delta
+		playerVX = playerVX / (deceliration * delta)
+		print("decelirating to", playerVX)
 	end
 
 	if playerVX > maxSpeed then
@@ -46,7 +49,7 @@ end
 
 function player.setCurrentPlayer(name)
 	if players[name] then
-		currentPlayers = name
+		currentPlayer = name
 	else
 		misc.warning("attempt to switch surrent player to \'" .. name .. "\' whitch does not exist")
 	end
@@ -86,23 +89,23 @@ function player.setVelocity(x, y)
 end
 
 function player.getPlayerPos()
-	if player[currentPlayer] then
-		local x, y = player[currentPlayer]["x"], player[currentPlayer]["y"]
+	local x, y = 0, 0
+	if players[currentPlayer] then
+		x, y = players[currentPlayer]["x"], players[currentPlayer]["y"]
 	else
 		misc.warning("attempt to get position of non-existent player \'" .. currentPlayer .. "\', returning x:0 y:0")
-		local x, y = 0, 0
 	end
 	return x, y
 end
 
 function player.getPlayerVelocity()
-	if player[currentPlayer] then
-		local x, y = player[currentPlayer]["vx"], player[currentPlayer]["vy"]
+	local vx, vy = 0, 0
+	if players[currentPlayer] then
+		vx, vy = players[currentPlayer]["vx"], players[currentPlayer]["vy"]
 	else
 		misc.warning("attempt to get velocity of non-existent player \'" .. currentPlayer .. "\', returning vx:0 vy:0")
-		local x, y = 0, 0
 	end
-	return x, y
+	return vx, vy
 end
 
 return player
