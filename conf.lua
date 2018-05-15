@@ -4,11 +4,11 @@ function love.conf(t)
     t.version = "11.1"                  -- The LÖVE version this game was made for (string)
     t.console = true                    -- Attach a console (boolean, Windows only)
     t.accelerometerjoystick = true      -- Enable the accelerometer on iOS and Android by exposing it as a Joystick (boolean)
-    t.externalstorage = true            -- True to save files (and read from the save directory) in external storage on Android (boolean) 
+    t.externalstorage = true            -- True to save files (and read from the save directory) in external storage on Android (boolean)
     t.gammacorrect = false              -- Enable gamma-correct rendering, when supported by the system (boolean)
- 
+
     t.audio.mixwithsystem = true        -- Keep background music playing when opening LOVE (boolean, iOS and Android only)
- 
+
     t.window.title = "Perlin"           -- The window title (string)
     t.window.icon = "assets/icon.bmp"   -- Filepath to an image to use as the window's icon (string)
     t.window.width = 640                -- The window width (number)
@@ -19,13 +19,13 @@ function love.conf(t)
     t.window.minheight = 64             -- Minimum window height if the window is resizable (number)
     t.window.fullscreen = false         -- Enable fullscreen (boolean)
     t.window.fullscreentype = "desktop" -- Choose between "desktop" fullscreen or "exclusive" fullscreen mode (string)
-    t.window.vsync = 1                  -- Vertical sync mode (number)
+    t.window.vsync = 2                  -- Vertical sync mode (number)
     t.window.msaa = 0                   -- The number of samples to use with multi-sampled antialiasing (number)
     t.window.display = 1                -- Index of the monitor to show the window in (number)
     t.window.highdpi = false            -- Enable high-dpi mode for the window on a Retina display (boolean)
     t.window.x = 300                    -- The x-coordinate of the window's position in the specified display (number)
     t.window.y = 300                    -- The y-coordinate of the window's position in the specified display (number)
- 
+
     t.modules.audio = true              -- Enable the audio module (boolean)
     t.modules.data = true               -- Enable the data module (boolean)
     t.modules.event = true              -- Enable the event module (boolean)

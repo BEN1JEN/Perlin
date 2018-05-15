@@ -1,4 +1,6 @@
 misc = {}
+FPS = 60
+RFPS = 0
 
 function misc.error(reason, description, where)
 	print ("\n\n")
@@ -38,6 +40,21 @@ end
 
 function misc.getWindowSize()
 	return love.window.getMode()
+end
+
+function misc.setFPS(delta)
+	RFPS = RFPS + delta
+	if RFPS >= 1 then
+		FPS = math.floor(1/delta/5)*5
+		RFPS = 0
+	end
+	return FPS
+end
+
+function misc.drawFPS()
+	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.print("FPS: " .. FPS, 0, 0, 0, 4, 4)
+	return FPS
 end
 
 return misc

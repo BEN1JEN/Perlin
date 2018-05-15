@@ -12,10 +12,12 @@ end
 
 function love.update(delta)
 	player.movePlayer(delta)
+	misc.setFPS(delta)
 end
 
 function love.draw()
 	draw.drawTerrain()
+	misc.drawFPS()
 	local x, y = player.getPlayerPos()
 	love.graphics.rectangle("fill", x, y, 200, 200)
 end

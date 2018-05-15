@@ -10,7 +10,7 @@ function player.movePlayer(delta)
 
 	local speed = 100
 	local maxSpeed = 20
-	local deceliration = 1000
+	local deceliration = 100
 
 	if sneek then
 		speed = 100
@@ -25,8 +25,12 @@ function player.movePlayer(delta)
 	elseif right and not left then
 		playerVX = playerVY + speed * delta
 	else
-		playerVX = playerVX / (deceliration * delta)
-		print("decelirating to", playerVX)
+		if playerVX > 0 then
+			playerVX = playerVX - deceliration * delta
+		end
+		if playerVX < 0 then
+			playerVX = playerVX + deceliration * delta
+		end
 	end
 
 	if playerVX > maxSpeed then
