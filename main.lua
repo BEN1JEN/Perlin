@@ -11,9 +11,11 @@ function love.load()
 end
 
 function love.update(delta)
-	print(player.getPlayerPos())
+	player.movePlayer(delta)
 end
 
 function love.draw()
 	draw.drawTerrain()
+	local x, y = player.getPlayerPos()
+	love.graphics.rectangle("fill", x, y, 200, 200)
 end

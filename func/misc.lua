@@ -1,13 +1,15 @@
 misc = {}
 
 function misc.error(reason, description, where)
+	print ("\n\n")
 	print ("--------------------------------------------------------------")
 	print ("Perlin Internal Error:")
 	print ("	Reason: " .. reason)
 	print ("	While doing: " .. where)
 	print ("	Desciription: ")
-	for i, line in ipairs(description) do
-		print ("		" .. i .. ":	" .. line)
+	for k, line in pairs(description) do
+		io.write("		" .. k .. ": ")
+		print (line)
 	end
 	print ("Lua error will now begin:")
 	print ("--------------------------------------------------------------")
