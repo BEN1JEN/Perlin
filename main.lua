@@ -17,7 +17,6 @@ end
 
 function love.draw()
 	draw.drawTerrain()
-	misc.drawFPS()
-	local x, y = player.getPlayerPos()
-	love.graphics.rectangle("fill", x, y, 200, 200)
+	draw.drawPlayer()
+	draw.drawFPS()
 end

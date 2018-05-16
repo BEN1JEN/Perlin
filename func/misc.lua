@@ -48,12 +48,9 @@ function misc.setFPS(delta)
 		FPS = math.floor(1/delta/5)*5
 		RFPS = 0
 	end
-	return FPS
 end
 
-function misc.drawFPS()
-	love.graphics.setColor(1, 1, 1, 1)
-	love.graphics.print("FPS: " .. FPS, 0, 0, 0, 4, 4)
+function misc.getFPS()
 	return FPS
 end
 

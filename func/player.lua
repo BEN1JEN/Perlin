@@ -9,29 +9,33 @@ function player.movePlayer(delta)
 	local playerVX, playerVY = player.getPlayerVelocity()
 
 	local speed = 100
-	local maxSpeed = 20
-	local deceliration = 100
+	local maxSpeed = 60
+	local deceliration = 25
+	local gravity = 200
+	local terminalVeolocity = 10000000000000000
 
 	if sneek then
 		speed = 100
-		maxSpeed = 5
+		maxSpeed = 30
 	elseif run then
 		speed = 50
-		maxSpeed = 40
+		maxSpeed = 100
 	end
 
 	if left and not right then
-		playerVX = playerVY - speed * delta
+		playerVX = playerVX - speed * delta
 	elseif right and not left then
-		playerVX = playerVY + speed * delta
+		playerVX = playerVX + speed * delta
 	else
-		if playerVX > 0 then
+		if playerVX > 0.15 then
 			playerVX = playerVX - deceliration * delta
-		end
-		if playerVX < 0 then
+		elseif playerVX < -0.15 then
 			playerVX = playerVX + deceliration * delta
+		else
+			playerVX = 0
 		end
 	end
+
 
 	if playerVX > maxSpeed then
 		playerVX = maxSpeed
@@ -40,7 +44,28 @@ function player.movePlayer(delta)
 		playerVX = maxSpeed*-1
 	end
 
-	playerX = playerX + playerVX
+	playerX = playerX + playerVX * delta
+
+	if jump and playerY + playerVY - 0.01 <= world.getTerrainHeightAt(playerX) then
+		playerVY = playerVY + 100
+	end
+
+	playerVY = playerVY - gravity * delta
+
+
+	if playerVY > terminalVeolocity then
+		playerVY = terminalVeolocity
+	end
+	if playerVY < terminalVeolocity*-1 then
+		playerVY = terminalVeolocity*-1
+	end
+
+	playerY = playerY + playerVY * delta
+
+	local tHeight = world.getTerrainHeightAt(playerX)
+	if playerY < tHeight then
+		playerY = tHeight
+	end
 
 	player.setVelocity(playerVX, playerVY)
 	player.playerGoTo(playerX, playerY)
@@ -55,7 +80,7 @@ function player.setCurrentPlayer(name)
 	if players[name] then
 		currentPlayer = name
 	else
-		misc.warning("attempt to switch surrent player to \'" .. name .. "\' whitch does not exist")
+		misc.warning("attempt to switch surrent player to \'" .. name .. "\' which does not exist")
 	end
 end
 
@@ -63,7 +88,7 @@ function player.newPlayer(name)
 	local player = {
 		id = #players + 1,
 		name = misc.generateName(2),
-		x = 0,
+		x = 500,
 		y = 0,
 		vx = 0,
 		vy = 0

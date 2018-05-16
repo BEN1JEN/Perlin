@@ -61,10 +61,10 @@ end
 
 function world.generateX(x)
 	return
-	  love.math.noise(x/1500, seed+3)*300
-	+ love.math.noise(x/500, seed+2)*100
-	+ love.math.noise(x/50,  seed+1)*10
-	+ love.math.noise(x/10,   seed+0)*5
+	  love.math.noise(x/1000, seed+3)*500
+	+ love.math.noise(x/500, seed+2)*200
+	+ love.math.noise(x/100,  seed+1)*25
+	+ love.math.noise(x/30,   seed+0)*10
 end
 
 return world
